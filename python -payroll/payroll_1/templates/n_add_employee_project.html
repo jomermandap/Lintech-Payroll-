@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Employee Involved List - Bridger</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fonts/fontawesome-all.min.css') }}">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 navbar-dark" style="background: #1f2e59;--bs-primary: #1f2e59;--bs-primary-rgb: 31,46,89;">
+            <div class="container-fluid d-flex flex-column p-0">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#" style="padding-bottom: 79px;">
+                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink" style="padding-bottom: 0px;padding-top: 63px;"></i></div>
+                    <div class="sidebar-brand-text mx-3" style="padding-bottom: 0px;padding-top: 63px;"><span style="padding-bottom: 0px;padding-top: 63px;">bridger</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link" href="/n_dashboard"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/n_employee"><i class="far fa-user"></i><span>Employees</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/n_client"><i class="far fa-address-card"></i><span>Clients</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/n_project"><i class="far fa-building"></i><span>Projects</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/n_attendance_project"><i class="far fa-calendar"></i><span>Attendance</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/n_payslip"><i class="far fa-credit-card"></i><span>Payroll</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/add_user"><i class="far fa-credit-card"></i><span>Add User</span></a></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-expand bg-white shadow mb-4 topbar static-top navbar-light">
+                    <div class="container-fluid">
+                        <button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                        <form id="searchForm" class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search" onsubmit="searchEmployee(); return false;">
+                            <div class="input-group">
+                                <input id="searchInput" class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
+                                <button class="btn btn-primary py-0" type="submit"><i class="fas fa-search"></i></button>
+                            </div>
+                        </form>
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                            <li class="nav-item dropdown d-sm-none no-arrow">
+                                <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
+                                <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in" aria-labelledby="searchDropdown">
+                                    <form class="me-auto navbar-search w-100">
+                                        <div class="input-group">
+                                            <input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
+                                            <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <div class="d-none d-sm-block topbar-divider"></div>
+                            <li class="nav-item dropdown no-arrow">
+                                <div class="nav-item dropdown no-arrow">
+                                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">
+                                        <span class="d-none d-lg-inline me-2 text-gray-600 small">Admin</span>
+                                        <img class="border rounded-circle img-profile" src="{{ url_for('static', filename='img/avatars/avatar1.jpeg') }}">
+                                    </a>
+                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
+                                        <a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity log</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="/"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="container-fluid">
+                    <h3 class="text-dark mb-4">Add an Employee to a Project</h3>
+                    <div class="card shadow">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 fw-bold">Project Data</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                <form id="addEmployeeProjectForm" method="POST" action="/add_employee_project">
+                                    <div class="form-group">
+                                        <label for="emp_proj_id">Employee Project ID:</label>
+                                        <input type="text" class="form-control" id="emp_proj_id" name="emp_proj_id" value="{{ generate_emp_proj_id }}" readonly>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="emp_name">Employee Name:</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="emp_name" name="emp_name" required>
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="button" onclick="searchEmployee()">Search</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="pr_name">Project Name:</label>
+                                        <select id="pr_name" name="pr_name" class="form-control" required>
+                                            {% for project in projects %}
+                                            <option value="{{ project['pr_id'] }}">{{ project['pr_name'] }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="pos_name">Position Name:</label>
+                                        <select id="pos_name" name="pos_name" class="form-control" required>
+                                            {% for position in positions %}
+                                            <option value="{{ position['posType'] }}">{{ position['posName'] }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Add Employee Project</button>
+                                </form>
+
+                                <!-- Display success or error messages -->
+                                {% if success_message %}
+                                <p class="text-success mt-3">{{ success_message }}</p>
+                                {% endif %}
+
+                                {% if error_message %}
+                                <p class="text-danger mt-3">{{ error_message }}</p>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <h3 class="text-dark mb-4" style="margin-top: 20px;"></h3>
+                    <div class="card shadow">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 fw-bold">Employee List</p>
+                        </div>
+                        <div class="card-body">
+                            <!-- Table to display search results -->
+                            <div id="searchResults" class="mt-4 table-responsive">
+                                <table class="table table-striped" id="searchResultsTable">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Employee ID</th>
+                                            <th scope="col">First Name</th>
+                                            <th scope="col">Last Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Search results will be displayed here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer" style="height: 62.8px;margin-top: 200px;">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Bridger 2024</span></div>
+                </div>
+            </footer>
+            <a class="border rounded d-inline scroll-to-top" href="#page-top" style="height: 36px;width: 34px;">
+                <i class="fas fa-angle-up"></i>
+            </a>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+z8vwu7+9Ihloa6I/xlpLeg0PsgCJoF9a0coQ1f" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+    <script>
+        // Function to search employees by name
+        function searchEmployee() {
+            var empName = document.getElementById('emp_name').value;
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/search_employee', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        displaySearchResults(response.employees);
+                    } else {
+                        alert(response.error_message);
+                    }
+                }
+            };
+            xhr.send('emp_name=' + empName);
+        }
+
+        // Function to display search results
+        function displaySearchResults(employees) {
+            var resultsDiv = document.getElementById('searchResults');
+            resultsDiv.innerHTML = ''; // Clear previous results
+
+            // Create a table to display the search results
+            var table = document.createElement('table');
+            var thead = document.createElement('thead');
+            var tbody = document.createElement('tbody');
+
+            // Create table headers
+            var headers = ['Employee ID', 'First Name', 'Last Name'];
+            var headerRow = document.createElement('tr');
+            headers.forEach(function(headerText) {
+                var th = document.createElement('th');
+                th.textContent = headerText;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            // Populate table rows with employee details
+            employees.forEach(function(employee) {
+                var tr = document.createElement('tr');
+                tr.addEventListener('click', function() {
+                    selectEmployee(employee);
+                });
+
+                // Create table data for each employee attribute
+                var tdEmpID = document.createElement('td');
+                tdEmpID.textContent = employee.empID;
+                tr.appendChild(tdEmpID);
+
+                var tdEmpFName = document.createElement('td');
+                tdEmpFName.textContent = employee.empFName;
+                tr.appendChild(tdEmpFName);
+
+                var tdEmpLName = document.createElement('td');
+                tdEmpLName.textContent = employee.empLName;
+                tr.appendChild(tdEmpLName);
+
+                // Append the table row to the table body
+                tbody.appendChild(tr);
+            });
+
+            table.appendChild(tbody);
+            resultsDiv.appendChild(table);
+        }
+
+        // Function to select an employee from the table
+        function selectEmployee(employee) {
+            var empNameParts = employee.empFName.split(' ');
+            document.getElementById('emp_name').value = empNameParts[0];
+            // Optionally, you can hide the search results after selecting an employee
+            document.getElementById('searchResults').innerHTML = '';
+        }
+    </script>
+</body>
+
+</html>

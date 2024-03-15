@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Bridger</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome/css/all.min.css') }}">
+</head>
+<body class="bg-gradient-primary" style="background: url('{{ url_for('static', filename='img/rm218-bb-07.jpg') }}') no-repeat; background-size: cover;">
+    <section class="position-relative py-4 py-xl-5" style="height: 100%; filter: blur(0px); background: url('{{ url_for('static', filename='img/rm218-bb-07.jpg') }}') no-repeat; background-size: cover;">
+        <div class="container" style="margin-top: 88px; padding-top: 3px; transition: ease-in;">
+            <div class="row mb-5" style="padding-top: 0px; margin-top: -19px;">
+                <div class="col-md-8 col-xl-5 text-center mx-auto" style="height: 66.3906px; margin-bottom: -2px;">
+                    <h2 style="margin-top: 40px; color: var(--bs-primary-text-emphasis); font-size: 35px; font-weight: bold;">Welcome Back, Admin</h2>
+                    {% if error_message %}
+                        <p class="error">{{ error_message }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6 col-lg-3 col-xl-5 offset-xl-0" style="width: 494px; padding-right: 20px; padding-left: 20px; height: 321px;">
+                    <div class="card mb-5" style="border-style: none; box-shadow: 0px 0px; border-radius: 19px; background: #f7fbff;">
+                        <div class="card-body d-flex flex-column align-items-center" style="height: 294px; border-radius: 21px; box-shadow: 0px 0px 14px 3px rgba(33, 37, 41, 0.58); background: var(--bs-secondary-bg);">
+                            <form class="text-center" action="/login" method="post" style="padding-top: 37px; border-radius: 21px;">
+                                <div class="mb-3" style="border-radius: 21px;">
+                                    <input class="form-control" type="text" name="username" placeholder="Username" style="width: 290px; margin-top: 10px; border-radius: 8px;" required="">
+                                </div>
+                                <div class="mb-3" style="border-radius: 21px;">
+                                    <input class="form-control" type="password" name="password" placeholder="Password" style="width: 290px; margin-top: 10px; border-radius: 8px;" required="">
+                                </div>
+                                <div class="mb-3" style="border-radius: 21px;">
+                                    <input class="btn btn-primary d-block w-100" type="submit" value="Login" style="width: 290px; margin-top: 10px; border-radius: 8px; background: #002654;">
+                                </div>
+                                <p class="text-muted" style="margin-top: 10px; color: var(--bs-body-color); width: 290px;">Forgot your password?</p>
+                            </form>
+{#                            <button class="btn btn-primary d-block w-100" onclick="window.location.href='/add_user'" style="width: 290px; margin-top: 10px; border-radius: 8px;">Add User</button>#}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bs-init.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+BPB PLANNERS AND BUILDERS
+
+            Period: 2024-03-03 to 2024-03-10
+            
+            Employee ID: EMP5725041579
+            
+            Gross: 1093.616875
+            
+            Total Deductions: 300.0
+            
+            Net: 793.6168749999999
+            
